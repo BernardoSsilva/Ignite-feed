@@ -1,6 +1,4 @@
-import {
-    useState
-} from "react";
+import { useState } from "react";
 import { Avatar } from "../avatar/avatar";
 import { Comment } from "../comment/Comment";
 import styles from "./Post.module.css";
@@ -33,6 +31,13 @@ export function Post({
     }
     setComments([...comments, newCommentText]);
     setNewCommentText("");
+  }
+
+  function handleDeleteComment(commentToDelete: any) {
+    const commentsWithoutDeletedOne = comments.filter(
+      (comment) => comment !== commentToDelete
+    );
+    setComments(commentsWithoutDeletedOne);
   }
   return (
     <article className={styles.post}>
@@ -74,7 +79,13 @@ export function Post({
 
       <div className={styles.commentList}>
         {comments.map((comment) => {
-          return <Comment  content={comment} date={new Date()} />;
+          return (
+            <Comment
+              content={comment}
+              date={new Date()}
+              deleteComment={handleDeleteComment}
+            />
+          );
         })}
       </div>
     </article>
