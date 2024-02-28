@@ -117,3 +117,8 @@
 .commentList {
   margin-top: 2rem;
 }
+
+.commentForm button:disabled,  .commentForm button:disabled:hover {
+  cursor: not-allowed;
+  background-color: var(--red-danger);
+}

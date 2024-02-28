@@ -1,6 +1,7 @@
 import { ThumbsUp, Trash } from "@phosphor-icons/react";
 import styles from "./Comment.module.css";
 import { Avatar } from "../avatar/avatar";
+import { useState } from "react";
 
 export function Comment({ content = "", date = new Date(), deleteComment }) {
   const publishedDateFormat = new Intl.DateTimeFormat("pt-BR", {
@@ -10,6 +11,11 @@ export function Comment({ content = "", date = new Date(), deleteComment }) {
     minute: "2-digit",
   }).format(date);
 
+  const [likeCount , setLikeCount] = useState(0)
+
+function handleLikeComment(){
+  setLikeCount(likeCount + 1)
+}
   function onDeleteComment() {
     deleteComment(content);
   }
@@ -32,9 +38,9 @@ export function Comment({ content = "", date = new Date(), deleteComment }) {
           <p>{content}</p>
         </div>
         <footer>
-          <button>
+          <button onClick={handleLikeComment}>
             <ThumbsUp size={20} />
-            aplaudir<span>20</span>
+            aplaudir<span>{likeCount}</span>
           </button>
         </footer>
       </div>

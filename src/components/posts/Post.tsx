@@ -11,7 +11,6 @@ export function Post({
       content: "",
     },
   ] || [],
-
   date = new Date(),
 }) {
   const publishedDateFormat = new Intl.DateTimeFormat("pt-BR", {
@@ -33,12 +32,29 @@ export function Post({
     setNewCommentText("");
   }
 
+
+
+
+
   function handleDeleteComment(commentToDelete: any) {
     const commentsWithoutDeletedOne = comments.filter(
       (comment) => comment !== commentToDelete
     );
     setComments(commentsWithoutDeletedOne);
   }
+
+
+
+
+
+  function handleValidateComment() {
+    event.target.setCustomValidity("Este campo é orbigatório");
+  }
+
+
+
+  
+
   return (
     <article className={styles.post}>
       <header>
@@ -70,10 +86,15 @@ export function Post({
         <textarea
           value={newCommentText}
           name="commentContent"
-          onChange={(e) => setNewCommentText(e.target.value)}
+          onChange={(e) => {
+            setNewCommentText(e.target.value);
+            e.target.setCustomValidity("");
+          }}
+          onInvalid={handleValidateComment}
+          required
         ></textarea>
         <footer>
-          <button type="submit">Enviar comentário</button>
+          <button type="submit" disabled={newCommentText == ""}>Enviar comentário</button>
         </footer>
       </form>
 
