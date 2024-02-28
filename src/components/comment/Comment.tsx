@@ -1,19 +1,16 @@
 import { ThumbsUp, Trash } from "@phosphor-icons/react";
 import styles from "./Comment.module.css";
+import { Avatar } from "../avatar/avatar";
 
 export function Comment() {
   return (
     <div className={styles.comment}>
-      <img
-        className={styles.avatar}
-        src="http://github.com/BernardoSsilva.png"
-        alt=""
-      />
+      <Avatar hasBorder={false} src="https://github.com/Napolinha.png"/>
       <div className={styles.commentBox}>
         <div className={styles.commentContent}>
           <header>
             <div className={styles.authorAndTime}>
-              <strong>Bernardo Santos da Silva</strong>
+              <strong>Luiz Gustavo Nunes Napoleão</strong>
 
               <time
                 title="28 de fevereiro às 5:30"
