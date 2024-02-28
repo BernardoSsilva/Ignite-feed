@@ -1,12 +1,9 @@
-import styles from "./Post.module.css";
-import { Comment } from "../comment/Comment";
-import { Avatar } from "../avatar/avatar";
 import {
-  ReactElement,
-  JSXElementConstructor,
-  ReactNode,
-  useState,
+    useState
 } from "react";
+import { Avatar } from "../avatar/avatar";
+import { Comment } from "../comment/Comment";
+import styles from "./Post.module.css";
 
 export function Post({
   author = { avatarUrl: "", name: "", role: "" },
@@ -14,7 +11,6 @@ export function Post({
     {
       type: "",
       content: "",
-      target: "",
     },
   ] || [],
 
@@ -56,8 +52,7 @@ export function Post({
       <div className={styles.content}>
         {content.map((field) => {
           if (field.type == "paragraph") return <p>{field.content}</p>;
-          if (field.type == "link")
-            return <a href={field.target}>{field.content}</a>;
+          if (field.type == "link") return <a href="#">{field.content}</a>;
         })}
       </div>
 
@@ -79,7 +74,7 @@ export function Post({
 
       <div className={styles.commentList}>
         {comments.map((comment) => {
-          return <Comment content={comment} date={new Date()} />;
+          return <Comment  content={comment} date={new Date()} />;
         })}
       </div>
     </article>

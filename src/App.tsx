@@ -1,9 +1,8 @@
-import { Header } from "./components/header/Header";
-import "./global-styles.css";
 import styles from "./app.module.css";
-import { SideBar } from "./components/sidebar/Sidebar";
+import { Header } from "./components/header/Header";
 import { Post } from "./components/posts/Post";
-import { Target } from "@phosphor-icons/react";
+import { SideBar } from "./components/sidebar/Sidebar";
+import "./global-styles.css";
 
 function App() {
   const posts = [
@@ -39,7 +38,7 @@ function App() {
           content:
             "Acabei de subir mais um projeto no meu portifa. É um projeto que fiz no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀",
         },
-        { type: "link", content: "👉 jane.design/doctorcare", target: "#" },
+        { type: "link", content: "👉 jane.design/doctorcare" },
       ],
       publishedAt: new Date(),
     },
@@ -56,6 +55,7 @@ function App() {
             {posts.map((post) => {
               return (
                 <Post
+                  key={post.id}
                   author={post.author}
                   content={post.content}
                   date={post.publishedAt}
