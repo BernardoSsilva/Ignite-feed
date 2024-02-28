@@ -91,8 +91,20 @@
   color: var(--grey-100);
   line-height: 1.4;
   margin-top: 1rem;
+  transition: outline .5s;
+}
+.commentForm textarea:focus{
+    outline: 1px solid var(--green-light);
+}
+.commentForm footer{
+    visibility: hidden;
+    max-height: 0;
 }
 
+.commentForm:focus-within footer{
+    visibility: visible;
+    max-height: none;
+}
 .commentForm button{
     padding: 1rem 1.5rem;
     margin-top: 1rem;
