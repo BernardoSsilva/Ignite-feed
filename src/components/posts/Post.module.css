@@ -24,6 +24,7 @@
   color: var(--green);
   text-decoration: none;
   transition: 0.4s;
+  cursor: pointer;
 }
 
 .content a:hover {

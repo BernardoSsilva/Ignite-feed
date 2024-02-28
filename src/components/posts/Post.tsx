@@ -1,51 +1,86 @@
 import styles from "./Post.module.css";
 import { Comment } from "../comment/Comment";
 import { Avatar } from "../avatar/avatar";
+import {
+  ReactElement,
+  JSXElementConstructor,
+  ReactNode,
+  useState,
+} from "react";
 
-export function Post() {
+export function Post({
+  author = { avatarUrl: "", name: "", role: "" },
+  content = [
+    {
+      type: "",
+      content: "",
+      target: "",
+    },
+  ] || [],
+
+  date = new Date(),
+}) {
+  const publishedDateFormat = new Intl.DateTimeFormat("pt-BR", {
+    day: "2-digit",
+    month: "long",
+    hour: "2-digit",
+    minute: "2-digit",
+  }).format(date);
+
+  const [newCommentText, setNewCommentText] = useState("");
+  const [comments, setComments] = useState(["Muito Bacana"]);
+  function handleCreateNewComment() {
+    event?.preventDefault();
+
+    if (newCommentText == " ") {
+      console.log("comentário vazio");
+    }
+    setComments([...comments, newCommentText]);
+    setNewCommentText("");
+  }
   return (
     <article className={styles.post}>
       <header>
         <div className={styles.user}>
-          <Avatar  src="https://github.com/davimarcilio.png" />
+          <Avatar src={author.avatarUrl} />
           <div className={styles.userInfo}>
-            <strong>Davi Marcilio</strong>
-            <span>Full stack developer</span>
+            <strong>{author.name}</strong>
+            <span>{author.role}</span>
           </div>
         </div>
 
         <time title="28 de fevereiro as 5:30" dateTime="2024-02-28 05:30:15">
-          Publicado há 1h
+          {publishedDateFormat}
         </time>
       </header>
       <div className={styles.content}>
-        <p>Fala galeraa 👋 </p>
-        <p>
-          Acabei de subir mais um projeto no meu portifa. É um projeto que fiz
-          no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀{" "}
-        </p>
-        <p>
-          <a href="#">👉 jane.design/doctorcare </a>
-        </p>
-        <p>
-          <a href="#">#novoprojeto</a> <a href="#"> #nlw</a>{" "}
-          <a href="#">#rocketseat</a>{" "}
-        </p>
+        {content.map((field) => {
+          if (field.type == "paragraph") return <p>{field.content}</p>;
+          if (field.type == "link")
+            return <a href={field.target}>{field.content}</a>;
+        })}
       </div>
 
-      <form action="" className={styles.commentForm}>
+      <form
+        onSubmit={handleCreateNewComment}
+        action=""
+        className={styles.commentForm}
+      >
         <strong>Deixe o seu comentário</strong>
-        <textarea></textarea>
+        <textarea
+          value={newCommentText}
+          name="commentContent"
+          onChange={(e) => setNewCommentText(e.target.value)}
+        ></textarea>
         <footer>
           <button type="submit">Enviar comentário</button>
         </footer>
       </form>
 
       <div className={styles.commentList}>
-        <Comment />
-        <Comment />
-        <Comment />
-        <Comment />
+        {comments.map((comment) => {
+          return <Comment content={comment} date={new Date()} />;
+        })}
       </div>
     </article>
   );
