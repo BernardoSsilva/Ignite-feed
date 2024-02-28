@@ -34,6 +34,12 @@ export function Post(props) {
           <a href="#">#rocketseat</a>{" "}
         </p>
       </div>
+
+      <form action="" className={styles.commentForm}>
+        <strong>Deixe o seu comentário</strong>
+        <textarea></textarea>
+        <button type="submit">Enviar comentário</button>
+      </form>
     </article>
   );
 }
